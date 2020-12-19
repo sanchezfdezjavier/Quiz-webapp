@@ -1,9 +1,10 @@
 import React from 'react'
 
 export default function QuizCard(props) {
+    console.log(props)
     return (
         <div className="card">
-            <img src="..." className="card-img-top" alt="..."/>
+            <img src={props.quiz.attachment.url} className="card-img-top" alt="..."/>
             <div className="card-body">
                 <h5 className="card-title"> 
                     {props.quiz.question}

@@ -28,7 +28,7 @@ function quizzes(state = [], action = {}) {
             return state.map((quiz, i)=>{
                 return {
                     ...quiz,
-                    userAnswer: action.payload.index === i ? action.payload.answer : quiz.userAnswer
+                    userAnswer: action.payload.index === i ? action.payload.answer : quiz.userAnswer    
                 } 
             })
         default:
