@@ -4,14 +4,17 @@ export default function List(props) {
     const quizzes = props.quizzes
     const quizList = quizzes.map((quiz, i) => {
         const active = props.currentQuiz === i;
-        return <button className={`list-group-item list-group-item-action ${active ? "active" : ""}`}
+        return <button className={ `list-group-item list-group-item-action ${active ? "active" : ""} text-start` }
                        type="button"
-                       aria-current={active}> 
-                    {quiz.question} 
+                       aria-current={ active }
+                       onClick={ () => props.onChangeQuiz(i) }
+                       key={ i }
+                       > 
+                     {i + 1}. { quiz.question } 
                 </button>
     })
     return (
-        <ul className="list-group">
+        <ul className="list-group shadow m-5">
             { quizList }
         </ul>
     )
