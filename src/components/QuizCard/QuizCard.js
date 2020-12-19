@@ -36,7 +36,7 @@ export default function QuizCard(props) {
                         </div>
                         <div className="col-md-8">
                             <button className="btn btn-light">Prev</button>
-                            <button className="btn btn-light ms-2">Next</button>
+                            <button className="btn btn-light ms-2" onClick={ props.onNextQuiz }>Next</button>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { QUESTIONS_ANSWER, CHANGE_QUIZ } from './actions';
+import { QUESTIONS_ANSWER, CHANGE_QUIZ, NEXT_QUIZ } from './actions';
 
 function score(state = 0, action = {}) {
     switch(action.type) {
@@ -19,6 +19,8 @@ function currentQuiz(state = 0, action = {}) {
     switch(action.type) {
         case CHANGE_QUIZ:
             return action.index
+        case NEXT_QUIZ:
+            return action.nextIndex
         default:
             return state;
     }

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar/Navbar'
 import QuizCard from './components/QuizCard/QuizCard'
 import List from './components/List/List';
 import { connect } from 'react-redux';
-import { questionAnswer, changeQuiz } from './redux/actions'
+import { questionAnswer, changeQuiz, nextQuiz, prevQuiz } from './redux/actions'
 
 function App(props) {
   console.log("props <- state", props)
@@ -28,6 +28,9 @@ function App(props) {
             <QuizCard quiz={ props.quizzes[props.currentQuiz] } 
                       onQuestionAnswer={(answer) => {
                         props.dispatch(questionAnswer(props.currentQuiz, answer))
+                      }}
+                      onNextQuiz={()=>{
+                        props.dispatch(nextQuiz(props.currentQuiz))
                       }}
             />
           </div>
