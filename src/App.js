@@ -1,9 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 
 import Navbar from './components/Navbar/Navbar'
 import QuizCard from './components/QuizCard/QuizCard'
 import { connect } from 'react-redux';
+import { questionAnswer, quiestionAnswer } from './redux/actions'
 
 function App(props) {
   console.log(props.quizzes)
@@ -14,7 +14,11 @@ function App(props) {
       </header>
 
       <div className="container">
-        <QuizCard/>
+        <QuizCard quiz={props.quizzes[props.currentQuiz]} 
+                  onQuestionAnswer={(answer) => {
+                    props.dispatch(questionAnswer(props.currentQuiz, answer))
+                  }}
+        />
       </div>
 
     </div>
