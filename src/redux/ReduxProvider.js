@@ -1,7 +1,8 @@
 import { Provider } from 'react-redux';
 import GlobalState from './reducers';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { quizzes } from '../assets/mock-data';
+import thunk from 'redux-thunk'
 import React from 'react';
 import App from '../App';
 
@@ -30,6 +31,9 @@ export default class ReduxProvider extends React.Component {
     }
 
     configureStore() {
-        return createStore(GlobalState, this.initialState);
+        return createStore(
+            GlobalState, 
+            this.initialState, 
+            applyMiddleware(thunk));
     }
 }

@@ -32,7 +32,6 @@ export default function QuizCard(props) {
                 <div className="container mt-3">
                     <div className="row">
                         <div className="col-md-4">
-                            {console.log("current quiz", props.currentQuiz)}
                             <button className={`btn btn-outline-dark ${!(props.currentQuiz > 0) ? "disabled" : "" }`} onClick={ props.onPrevQuiz }>Prev</button>
                             <button className={`btn btn-outline-dark ms-2 ${!(props.currentQuiz < 9) ? "disabled" : "" }`} onClick={ props.onNextQuiz }>Next</button>
                         </div>

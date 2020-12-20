@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { QUIZZES_URL } from '../constants';
+import { QUIZZES_URL, TEST_URL } from '../constants';
 
 export const QUESTIONS_ANSWER = 'QUESTION_ANSWER';
 export const CHANGE_QUIZ = 'CHANGE_QUIZ';
@@ -40,9 +40,21 @@ export function submit(quizzes){
 }
 
 export function initQuizzes(){
-    axios.get(QUIZZES_URL)
-    .then(res => {
-        console.log("get request", res.data.quizzes)
-        return { type: INIT_QUIZZES, quizzes: res.data.quizzes}
-    })
+    return (dispatch) => {
+        axios.get(TEST_URL)
+        .then(res => {
+        console.log("get request", res.data.nextUrl)
+        const quizzes = res.data.quizzes
+        dispatch(fetchQuizzesSuccess(quizzes))
+        })
+        .catch(error => {
+            const errorMsg = error.message
+            console.log(errorMsg)
+        })
+    }
+}
+
+export function fetchQuizzesSuccess(quizzes){
+    return {
+        type: INIT_QUIZZES, payload: quizzes }
 }

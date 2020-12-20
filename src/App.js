@@ -4,6 +4,7 @@ import Navbar from './components/Navbar/Navbar'
 import QuizCard from './components/QuizCard/QuizCard'
 import List from './components/List/List';
 import { connect } from 'react-redux';
+import { useEffect } from 'react'
 import { questionAnswer, changeQuiz, nextQuiz, prevQuiz, submit, initQuizzes } from './redux/actions'
 
 function App(props) {
@@ -12,7 +13,6 @@ function App(props) {
     <div className="App">
       <header className="App-header">
         <Navbar/>
-        <p className="rounded bg-light">DEBUG current quiz: { props.currentQuiz }</p>
       </header>
 
       <div className="container">

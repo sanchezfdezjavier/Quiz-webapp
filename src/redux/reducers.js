@@ -43,7 +43,8 @@ function quizzes(state = [], action = {}) {
                 } 
             })
         case INIT_QUIZZES:
-            return action.newQuizzes
+            console.log("action.quizzes.filter()", action.payload)
+            return action.payload
         default:
             return state;
     }
