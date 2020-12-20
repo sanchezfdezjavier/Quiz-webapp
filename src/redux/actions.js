@@ -1,8 +1,12 @@
+import axios from 'axios'
+import { QUIZZES_URL } from '../constants';
+
 export const QUESTIONS_ANSWER = 'QUESTION_ANSWER';
 export const CHANGE_QUIZ = 'CHANGE_QUIZ';
 export const SUBMIT = 'SUBMIT';
 export const NEXT_QUIZ = 'NEXT_QUIZ'
 export const PREV_QUIZ = 'PREV_QUIZ'
+export const INIT_QUIZZES = 'INIT_QUIZZES'
 
 export function questionAnswer(index, answer){
     return { type: QUESTIONS_ANSWER, payload: { index, answer} };
@@ -13,11 +17,32 @@ export function changeQuiz(index) {
 }
 
 export function nextQuiz(currentIndex){
-    const  nextIndex = (currentIndex < 9) ? currentIndex + 1 : currentIndex;
+    const  nextIndex = currentIndex + 1;
     return { type: NEXT_QUIZ , nextIndex }
 }
 
 export function prevQuiz(currentIndex){
-    const  prevIndex = (currentIndex >=  0) ? currentIndex - 1 : currentIndex;
-    return { type: NEXT_QUIZ, prevIndex}
+    const  prevIndex = currentIndex - 1;
+    return { type: PREV_QUIZ, prevIndex }
+}
+
+export function submit(quizzes){
+    let newScore = 0;
+    quizzes.forEach(quiz => {
+        if (typeof quiz.userAnswer !== 'undefined') {
+            if(quiz.answer.toLowerCase() === quiz.userAnswer.toLowerCase()){
+                newScore += 1;
+            }
+          }
+    });
+    console.log("submit newScore", newScore)
+    return { type: SUBMIT, payload: {score: newScore, finished: true} }
+}
+
+export function initQuizzes(){
+    axios.get(QUIZZES_URL)
+    .then(res => {
+        console.log("get request", res.data.quizzes)
+        return { type: INIT_QUIZZES, quizzes: res.data.quizzes}
+    })
 }

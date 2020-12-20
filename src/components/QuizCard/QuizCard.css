@@ -1,9 +1,9 @@
 .card {
-	margin-left: 3rem;
-	margin-top: 3rem;
 	width: 40rem;
 }
 
 .author-img {
+	object-fit: cover;
 	width: 60px;
+	height: 60px;
 }

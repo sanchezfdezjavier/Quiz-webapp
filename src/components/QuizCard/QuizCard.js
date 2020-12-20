@@ -3,7 +3,7 @@ import './QuizCard.css'
 
 export default function QuizCard(props) {
     return (
-        <div className="card shadow m-5">
+        <div className="card shadow m-2">
             <img src={ props.quiz.attachment.url } className="card-img-top" alt="..."/>
             <div className="card-body">
                 <div className="row">
@@ -15,10 +15,10 @@ export default function QuizCard(props) {
                     <div className="col">
                         <div className="row">
                         <div className="col">
-                            <p>{props.quiz.author.username}</p>
+                            <p>Created by { props.quiz.author.username }</p>
                         </div>
                         <div className="col">
-                            <img src={ props.quiz.author.photo.url } className="rounded-circle author-img" alt="..."/>
+                            <img src={ props.quiz.author.photo.url } className="rounded-circle author-img mb-2" alt="..."/>
                         </div>
                         </div>
                     </div>
@@ -32,11 +32,9 @@ export default function QuizCard(props) {
                 <div className="container mt-3">
                     <div className="row">
                         <div className="col-md-4">
-                            <button className="btn btn-primary">Submit</button>
-                        </div>
-                        <div className="col-md-8">
-                            <button className="btn btn-light">Prev</button>
-                            <button className="btn btn-light ms-2" onClick={ props.onNextQuiz }>Next</button>
+                            {console.log("current quiz", props.currentQuiz)}
+                            <button className={`btn btn-outline-dark ${!(props.currentQuiz > 0) ? "disabled" : "" }`} onClick={ props.onPrevQuiz }>Prev</button>
+                            <button className={`btn btn-outline-dark ms-2 ${!(props.currentQuiz < 9) ? "disabled" : "" }`} onClick={ props.onNextQuiz }>Next</button>
                         </div>
                     </div>
                 </div>

@@ -14,7 +14,7 @@ export default function List(props) {
                 </button>
     })
     return (
-        <ul className="list-group shadow m-5">
+        <ul className="list-group shadow-sm m-2">
             { quizList }
         </ul>
     )

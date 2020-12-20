@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux'
-import { QUESTIONS_ANSWER, CHANGE_QUIZ, NEXT_QUIZ } from './actions';
+import { QUESTIONS_ANSWER, CHANGE_QUIZ, NEXT_QUIZ, PREV_QUIZ, SUBMIT, INIT_QUIZZES } from './actions';
 
 function score(state = 0, action = {}) {
+    console.log("score function triggered")
     switch(action.type) {
+        case SUBMIT:
+            return action.payload.score
         default:
             return state;
     }
@@ -10,6 +13,8 @@ function score(state = 0, action = {}) {
 
 function finished(state = false, action = {}) {
     switch(action.type) {
+        case SUBMIT:
+            return action.payload.finished
         default:
             return state;
     }
@@ -21,6 +26,8 @@ function currentQuiz(state = 0, action = {}) {
             return action.index
         case NEXT_QUIZ:
             return action.nextIndex
+        case PREV_QUIZ:
+            return action.prevIndex
         default:
             return state;
     }
@@ -35,6 +42,8 @@ function quizzes(state = [], action = {}) {
                     userAnswer: action.payload.index === i ? action.payload.answer : quiz.userAnswer    
                 } 
             })
+        case INIT_QUIZZES:
+            return action.newQuizzes
         default:
             return state;
     }
