@@ -45,7 +45,7 @@ export function initQuizzes(url){
         .then(res => {
         console.log("get request", res.data.nextUrl)
         const quizzes = res.data.quizzes
-        const nextUrl = res.data.nextUrl
+        const nextUrl = (quizzes.length === 0) ? QUIZZES_URL : res.data.nextUrl;
         dispatch(fetchQuizzesSuccess(quizzes, nextUrl))
         })
         .catch(error => {

@@ -4,3 +4,7 @@
 	flex-direction: column;
 	background: #ececec; /* fallback for old browsers */
 }
+
+.score {
+	font-size: xx-large !important;
+}
