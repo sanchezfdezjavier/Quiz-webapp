@@ -15,10 +15,10 @@ class App extends Component {
       return (
         <div className="container justify-content-center">
           <div className="row">
-          <h1 className="text-center display-1 m-4"> End! </h1>
+          <h1 className="text-center display-1 m-4"> Press to load quizzes </h1>
           <button className="btn btn-lg btn-primary text-center" 
                   onClick={()=>{ this.props.dispatch(initQuizzes(this.props.nextUrl))}}>
-                  Return to the first page!
+                  Go to the first page!
           </button>
           </div>
         </div>

@@ -27,13 +27,16 @@ export function prevQuiz(currentIndex){
 }
 
 export function submit(quizzes){
+    console.log("submit triggered", quizzes)
     let newScore = 0;
     quizzes.forEach(quiz => {
+        console.log(quiz.userAnswer)
+        console.log(quiz.answer)
         if (typeof quiz.userAnswer !== 'undefined') {
             if(quiz.answer.toLowerCase() === quiz.userAnswer.toLowerCase()){
                 newScore += 1;
             }
-          }
+        }
     });
     console.log("submit newScore", newScore)
     return { type: SUBMIT, payload: {score: newScore, finished: true} }
@@ -43,10 +46,10 @@ export function initQuizzes(url){
     return (dispatch) => {
         axios.get(url)
         .then(res => {
-        console.log("get request", res.data.nextUrl)
-        const quizzes = res.data.quizzes
-        const nextUrl = (quizzes.length === 0) ? QUIZZES_URL : res.data.nextUrl;
-        dispatch(fetchQuizzesSuccess(quizzes, nextUrl))
+            const quizzes = res.data.quizzes
+            console.log("get request", quizzes)
+            const nextUrl = (quizzes.length === 0) ? QUIZZES_URL : res.data.nextUrl;
+            dispatch(fetchQuizzesSuccess(quizzes, nextUrl))
         })
         .catch(error => {
             const errorMsg = error.message
