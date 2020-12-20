@@ -39,13 +39,14 @@ export function submit(quizzes){
     return { type: SUBMIT, payload: {score: newScore, finished: true} }
 }
 
-export function initQuizzes(){
+export function initQuizzes(url){
     return (dispatch) => {
-        axios.get(TEST_URL)
+        axios.get(url)
         .then(res => {
         console.log("get request", res.data.nextUrl)
         const quizzes = res.data.quizzes
-        dispatch(fetchQuizzesSuccess(quizzes))
+        const nextUrl = res.data.nextUrl
+        dispatch(fetchQuizzesSuccess(quizzes, nextUrl))
         })
         .catch(error => {
             const errorMsg = error.message
@@ -54,7 +55,6 @@ export function initQuizzes(){
     }
 }
 
-export function fetchQuizzesSuccess(quizzes){
-    return {
-        type: INIT_QUIZZES, payload: quizzes }
+export function fetchQuizzesSuccess(quizzes, nextUrl){
+    return { type: INIT_QUIZZES, payload: { quizzes, nextUrl } }
 }

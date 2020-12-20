@@ -43,8 +43,18 @@ function quizzes(state = [], action = {}) {
                 } 
             })
         case INIT_QUIZZES:
-            console.log("action.quizzes.filter()", action.payload)
-            return action.payload
+            console.log("reducer quizzes INIT_QUIZZES", action.payload)
+            return action.payload.quizzes
+        default:
+            return state;
+    }
+}
+
+function nextUrl(state = "", action = {}) {
+    switch(action.type) {
+        case INIT_QUIZZES:
+            console.log("nextUrl triggerd", action.payload.nextUrl)
+            return action.payload.nextUrl
         default:
             return state;
     }
@@ -54,7 +64,8 @@ const GlobalState = (combineReducers({
     score,
     finished, 
     currentQuiz,
-    quizzes
+    quizzes,
+    nextUrl
 }));
 
 export default GlobalState;
