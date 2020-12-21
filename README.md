@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Quizzes with React-Redux
+
+![](src/assets/website_preview.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
