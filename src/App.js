@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import QuizCard from './components/QuizCard/QuizCard'
 import List from './components/List/List';
+import Footer from './components/Footer/Footer'
 import { connect } from 'react-redux';
 import { questionAnswer, changeQuiz, nextQuiz, prevQuiz, submit, initQuizzes } from './redux/actions'
 import { QUIZZES_URL } from './constants';
@@ -11,24 +12,38 @@ class App extends Component {
   componentDidMount(){
     this.props.dispatch(initQuizzes())
   }
+
+  onEnterPress = (e) => {
+    console.log("event triggered")
+    if(e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      this.myFormRef.submit();
+    }
+  }
+
   render() {
     console.log(this.props)
     if(this.props.quizzes.length === 0){
       return (
-        <div className="container justify-content-center">
-          <div className="row">
-          <h1 className="text-center display-1 m-4"> Press to load quizzes </h1>
-          <button className="btn btn-lg btn-primary text-center" 
-                  onClick={()=>{ this.props.dispatch(initQuizzes(QUIZZES_URL))}}>
-                  Go to the first page!
-          </button>
+        <div className="App">
+          <header className="App-header slide-in-top" key={ Math.floor(Math.random() * 10) }>
+              <Navbar/>
+            </header>
+          <div className="container justify-content-center">
+            <div className="row">
+            <h1 className="text-center display-2 m-4"> No quizzes load </h1>
+            <button className="btn btn-lg btn-primary text-center" 
+                    onClick={()=>{ this.props.dispatch(initQuizzes(QUIZZES_URL))}}>
+                    Go to the first page!
+            </button>
+            </div>
           </div>
         </div>
       )
     } else {
       return (
         <div className="App">
-          <header className="App-header">
+          <header className="App-header slide-in-top">
             <Navbar/>
           </header>
     
@@ -39,13 +54,15 @@ class App extends Component {
                         currentQuiz={ this.props.currentQuiz } 
                         onChangeQuiz={(i) => {
                           this.props.dispatch(changeQuiz(i))
-                        }}/>
+                        }}
+                        />
                   <div className="row">
                         <div className="col-8 text-start m-2">
-                          <div className="rounded-lg">
+                          <div className="rounded-lg" onKeyDown={ this.onEnterPress }>
                               <button type="submit"
                                       className="btn btn-lg btn-success shadow-sm" 
-                                      onClick={ ()=>{ this.props.dispatch(submit(this.props.quizzes))} }>
+                                      onClick={ ()=>{ this.props.dispatch(submit(this.props.quizzes))} }
+                                      >
                                       Submit
                               </button>
                               <button className="btn btn-lg btn-primary ms-3 shadow-sm" 
@@ -77,7 +94,6 @@ class App extends Component {
               </div>
             </div>
           </div>
-    
         </div>
       );
     }
