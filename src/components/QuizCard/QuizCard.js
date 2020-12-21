@@ -1,11 +1,17 @@
-import React from 'react'
-import './QuizCard.css'
-import ImageNotFound from '../../assets/image_not_found.png'
+import React from 'react';
+import './QuizCard.css';
+import ImageNotFound from '../../assets/image_not_found.png';
+import { FaCheck } from "react-icons/fa";
 
 export default function QuizCard(props) {
     const quizImgSrc = (props.quiz.attachment !== null) ? props.quiz.attachment.url : ImageNotFound;
     const authorImgSrc = (props.quiz.author !== null) ? props.quiz.author.photo.url: ImageNotFound;
     const authorUsername = (props.quiz.author !== null && props.quiz.author.username !== null) ? props.quiz.author.username : "Anonymous";
+    const checkIfCorrect = (quiz)=> {
+        if((quiz.userAnswer !== null) && (quiz.userAnswer=== quiz.answer)){
+            return <FaCheck classsName="mr-2"/>
+        }
+    }
     return (
         <div className="card shadow m-2 w-80 h-80">
             <img src={ quizImgSrc } className="card-img-top" alt="..."/>
@@ -13,6 +19,7 @@ export default function QuizCard(props) {
                 <div className="row">
                     <div className="col-7">
                         <h3 className="card-title text-start display-6"> 
+                            { checkIfCorrect(props.quiz) }
                             { props.quiz.question }
                         </h3>
                     </div>

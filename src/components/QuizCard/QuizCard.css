@@ -1,10 +1,10 @@
 .card {
-	width: 40rem;
+	max-width: 50rem;
 }
 
 .card-img-top {
 	object-fit: cover;
-	max-height: 50em;
+	max-height: 30em;
 }
 
 .card-title {
