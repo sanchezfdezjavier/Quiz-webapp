@@ -5,6 +5,8 @@ import QuizCard from './components/QuizCard/QuizCard'
 import List from './components/List/List';
 import { connect } from 'react-redux';
 import { questionAnswer, changeQuiz, nextQuiz, prevQuiz, submit, initQuizzes } from './redux/actions'
+import { QUIZZES_URL } from './constants';
+import { FaCheck } from "react-icons/fa";
 class App extends Component {
   componentDidMount(){
     this.props.dispatch(initQuizzes())
@@ -17,7 +19,7 @@ class App extends Component {
           <div className="row">
           <h1 className="text-center display-1 m-4"> Press to load quizzes </h1>
           <button className="btn btn-lg btn-primary text-center" 
-                  onClick={()=>{ this.props.dispatch(initQuizzes(this.props.nextUrl))}}>
+                  onClick={()=>{ this.props.dispatch(initQuizzes(QUIZZES_URL))}}>
                   Go to the first page!
           </button>
           </div>
@@ -39,21 +41,21 @@ class App extends Component {
                           this.props.dispatch(changeQuiz(i))
                         }}/>
                   <div className="row">
-                        <div className="col-8">
-                          <div className="btn-group bg-white rounded-lg shadow-sm">
+                        <div className="col-8 text-start m-2">
+                          <div className="rounded-lg">
                               <button type="submit"
-                                      className="btn btn-lg btn-success" 
+                                      className="btn btn-lg btn-success shadow-sm" 
                                       onClick={ ()=>{ this.props.dispatch(submit(this.props.quizzes))} }>
                                       Submit
                               </button>
-                              <button className="btn btn-lg btn-primary" 
-                                      onClick={()=>{ this.props.dispatch(initQuizzes(this.props.nextUrl))}}>
+                              <button className="btn btn-lg btn-primary ms-3 shadow-sm" 
+                                      onClick={()=>{ this.props.dispatch(initQuizzes(QUIZZES_URL))}}>
                                       Load more quizzes
                               </button>
                           </div>
                         </div>
-                        <div className="col text-center">
-                          <p className="score display-6">Score: {this.props.score}</p>
+                        <div className="col text-center m-1">
+                          <p className="score display-6"><FaCheck/> {this.props.score}</p>
                         </div>
                   </div>
               </div>

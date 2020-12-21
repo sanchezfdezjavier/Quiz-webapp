@@ -2,6 +2,15 @@
 	width: 40rem;
 }
 
+.card-img-top {
+	object-fit: cover;
+	max-height: 50em;
+}
+
+.card-title {
+	font-size: xx-large !important;
+}
+
 .author-img {
 	object-fit: cover;
 	width: 50px;

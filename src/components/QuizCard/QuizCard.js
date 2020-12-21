@@ -1,21 +1,25 @@
 import React from 'react'
 import './QuizCard.css'
+import ImageNotFound from '../../assets/image_not_found.png'
 
 export default function QuizCard(props) {
+    const quizImgSrc = (props.quiz.attachment !== null) ? props.quiz.attachment.url : ImageNotFound;
+    const authorImgSrc = (props.quiz.author !== null) ? props.quiz.author.photo.url: ImageNotFound;
+    const authorUsername = (props.quiz.author !== null && props.quiz.author.username !== null) ? props.quiz.author.username : "Anonymous";
     return (
         <div className="card shadow m-2 w-80 h-80">
-            <img src={ props.quiz.attachment.url } className="card-img-top" alt="..."/>
+            <img src={ quizImgSrc } className="card-img-top" alt="..."/>
             <div className="card-body">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-7">
                         <h3 className="card-title text-start display-6"> 
                             { props.quiz.question }
                         </h3>
                     </div>
-                    <div className="col-4">
-                            <div className="col justify-content-end">
-                                Created by { props.quiz.author.userName }
-                                <img src={ props.quiz.author.photo.url } className="d-inline-block rounded-circle author-img m-1" alt="..."/>
+                    <div className="col-5">
+                            <div className="col justify-content-end d-inline-block">
+                                Created by { authorUsername }
+                                <img src={ authorImgSrc } className="d-inline-block rounded-circle author-img m-1" alt="..."/>
                             </div>
                     </div>
                 </div>

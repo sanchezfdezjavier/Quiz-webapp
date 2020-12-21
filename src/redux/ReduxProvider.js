@@ -15,7 +15,6 @@ export default class ReduxProvider extends React.Component {
             finished: false,
             currentQuiz: 0,
             quizzes: [],
-            nextUrl: QUIZZES_URL
         };
         this.store = this.configureStore();
     }

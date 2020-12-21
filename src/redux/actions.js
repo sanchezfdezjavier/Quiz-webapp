@@ -46,10 +46,9 @@ export function initQuizzes(url){
     return (dispatch) => {
         axios.get(url)
         .then(res => {
-            const quizzes = res.data.quizzes
+            const quizzes = res.data
             console.log("get request", quizzes)
-            const nextUrl = (quizzes.length === 0) ? QUIZZES_URL : res.data.nextUrl;
-            dispatch(fetchQuizzesSuccess(quizzes, nextUrl))
+            dispatch(fetchQuizzesSuccess(quizzes))
         })
         .catch(error => {
             const errorMsg = error.message
@@ -58,6 +57,6 @@ export function initQuizzes(url){
     }
 }
 
-export function fetchQuizzesSuccess(quizzes, nextUrl){
-    return { type: INIT_QUIZZES, payload: { quizzes, nextUrl } }
+export function fetchQuizzesSuccess(quizzes){
+    return { type: INIT_QUIZZES, quizzes}
 }
