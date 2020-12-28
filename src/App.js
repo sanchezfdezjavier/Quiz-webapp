@@ -16,9 +16,12 @@ class App extends Component {
 
   onEnterPress = (e) => {
     console.log("event triggered")
-    if(e.keyCode == 13 && e.shiftKey == false) {
+    if(e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
       this.props.dispatch(submit(this.props.quizzes))
+      if(this.props.currentQuiz < 9){
+        this.props.dispatch(nextQuiz(this.props.currentQuiz))
+      }
     }
   }
 
