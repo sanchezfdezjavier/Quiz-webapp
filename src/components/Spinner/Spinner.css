@@ -1,0 +1,18 @@
+.spinner {
+	height: 100px;
+	width: 100px;
+	background: rgba(236, 236, 236, 0.4);
+	border-radius: 50%;
+	border-top: 5px solid #878787;
+	border-right: 5px solid transparent;
+	border-bottom: none;
+	border-left: none;
+	animation: spinner5 500ms linear infinite;
+	box-shadow: 1em;
+}
+
+@keyframes spinner5 {
+	to {
+		transform: rotate(360deg);
+	}
+}

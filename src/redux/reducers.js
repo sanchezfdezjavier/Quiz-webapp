@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { QUESTIONS_ANSWER, CHANGE_QUIZ, NEXT_QUIZ, PREV_QUIZ, SUBMIT, INIT_QUIZZES } from './actions';
+import { QUESTIONS_ANSWER, CHANGE_QUIZ, NEXT_QUIZ, PREV_QUIZ, SUBMIT, INIT_QUIZZES, TOGGLE_FINISHED } from './actions';
 
 function score(state = 0, action = {}) {
     console.log("score function triggered")
@@ -14,6 +14,8 @@ function score(state = 0, action = {}) {
 function finished(state = false, action = {}) {
     switch(action.type) {
         case SUBMIT:
+            return action.payload.finished
+        case INIT_QUIZZES:
             return action.payload.finished
         default:
             return state;
@@ -44,7 +46,7 @@ function quizzes(state = [], action = {}) {
             })
         case INIT_QUIZZES:
             console.log("reducer quizzes INIT_QUIZZES", action.payload)
-            return action.quizzes
+            return action.payload.quizzes
         default:
             return state;
     }

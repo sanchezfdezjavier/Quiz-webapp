@@ -58,5 +58,5 @@ export function initQuizzes(url){
 }
 
 export function fetchQuizzesSuccess(quizzes){
-    return { type: INIT_QUIZZES, quizzes}
+    return { type: INIT_QUIZZES, payload: { quizzes, finished: true}}
 }

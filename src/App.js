@@ -1,17 +1,17 @@
 import './App.css';
 import React, { Component } from 'react'
 import Navbar from './components/Navbar/Navbar'
+import Spinner from './components/Spinner/Spinner'
 import QuizCard from './components/QuizCard/QuizCard'
 import List from './components/List/List';
-import Footer from './components/Footer/Footer'
 import { connect } from 'react-redux';
-import { questionAnswer, changeQuiz, nextQuiz, prevQuiz, submit, initQuizzes } from './redux/actions'
+import { questionAnswer, changeQuiz, nextQuiz, prevQuiz, submit, initQuizzes, toggleFinished } from './redux/actions'
 import { QUIZZES_URL } from './constants';
 import { FaCheck } from "react-icons/fa";
 class App extends Component {
   componentDidMount(){
     console.log("triggered")
-    this.props.dispatch(initQuizzes())
+    this.props.dispatch(initQuizzes(QUIZZES_URL))
   }
 
   onEnterPress = (e) => {
@@ -27,22 +27,10 @@ class App extends Component {
 
   render() {
     console.log(this.props)
-    if(this.props.quizzes.length === 0){
+    if(!this.props.finished){
       return (
-        <div className="App">
-          <div className="jumbotron">
-            <header className="App-header slide-in-top" key={ Math.floor(Math.random() * 10) }>
-                <Navbar/>
-            </header>
-            <div className="container justify-content-center align-content-center">
-              
-              <h1 className="text-center display-4 m-4"> No quizzes load </h1>
-              <button className="btn btn-lg btn-primary text-center" 
-                      onClick={()=>{ this.props.dispatch(initQuizzes(QUIZZES_URL))}}>
-                      Go to the first page!
-              </button>            
-            </div>
-          </div>
+        <div className="App loading">
+            <Spinner/>
         </div>
       )
     } else {
